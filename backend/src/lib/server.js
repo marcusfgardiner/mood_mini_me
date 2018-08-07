@@ -19,6 +19,8 @@ mongoose.connect(MONGODB_URI);
 app.use(bodyParser.json(),cors())
 
 app.use(require('../route/auth-router'));
+// I added this as auth-router isn't a file!
+app.use(require("../routes/user.routes.js"));
 
 app.all('*', (request,response) => {
     console.log('Returning a 404 from catch-all route');
