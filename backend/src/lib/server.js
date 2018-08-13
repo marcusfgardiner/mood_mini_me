@@ -22,9 +22,16 @@ app.use(bodyParser.json(),cors())
 // I added this as auth-router isn't a file!
 app.use(require("../routes/user.routes.js"));
 
-app.all('*', (request,response) => {
-    console.log('Returning a 404 from catch-all route');
-    return response.sendStatus(404);
+// app.all('*', (request,response) => {
+//     console.log('Returning a 404 from catch-all route');
+//     return response.sendStatus(404);
+// });
+
+// Key is that I need to go further than this to actually USING the routes from the mongoose connection to make DB changes
+app.get('/api/hello', (req, res) => {
+    res.send({
+        express: 'Hello from the backend of expreessss'
+    })
 });
 
 // error middleware
