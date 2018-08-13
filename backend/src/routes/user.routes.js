@@ -1,9 +1,9 @@
 'use strict'
 
 import { Router } from 'express';
-import bodyParser from 'body-parser';
+import jsonParser from 'body-parser';
 
-import basicAuth from '../lib/basic-auth-middleware.js'
+// import basicAuth from '../lib/basic-auth-middleware.js'
 import User from '../model/user.js';
 
 const authRouter = module.exports = new Router();
@@ -16,7 +16,7 @@ authRouter.post('/api/signup', jsonParser, (req, res, next) => {
     .catch(next)
 })
 
-authRouter.get('/api/login', basicAuth, (req, res, next) => {
+authRouter.get('/api/login', (req, res, next) => {
     console.log('hit /api/login')
 
     req.user.tokenCreate()

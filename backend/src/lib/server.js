@@ -11,14 +11,14 @@ const router = express.Router();
 //env variables
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mood_mini_me'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mood_mini_me'
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 app.use(bodyParser.json(),cors())
 
-app.use(require('../route/auth-router'));
+// app.use(require('../route/auth-router'));
 // I added this as auth-router isn't a file!
 app.use(require("../routes/user.routes.js"));
 
@@ -28,7 +28,7 @@ app.all('*', (request,response) => {
 });
 
 // error middleware
-app.use(require('./error-middleware'));
+// app.use(require('./error-middleware'));
 
 export const start = () => {
     app.listen(PORT, () => {
