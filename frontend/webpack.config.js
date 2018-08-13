@@ -1,13 +1,23 @@
 'use strict'
 
+const path = require('path');
+
+module.exports = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'my-first-webpack.bundle.js'
+    }
+};
+
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 module.exports = {
     devtool: 'eval',
-    entry: '${__dirname}/src/main.js',
+    entry: path.resolve(__dirname, 'src/main.js'),
     output: {
         filename: 'bundle-[hash].js',
-        path: '${__dirname}/build',
+        path: path.resolve(__dirname, 'build'),
         publicPath: '/',
     },
     plugins: [
