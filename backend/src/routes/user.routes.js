@@ -16,6 +16,7 @@ authRouter.post('/api/signup', jsonParser, (req, res, next) => {
     .catch(next)
 })
 
+//I removed the 'basicAuth' call below as do not have a file set up for this
 authRouter.get('/api/login', (req, res, next) => {
     console.log('hit /api/login')
 
