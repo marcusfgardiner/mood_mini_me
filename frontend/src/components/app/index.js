@@ -8,13 +8,14 @@ class App extends Component {
         }
     }
 
-    // handleScaleChange = event => {
-    //     this.setState({
-    //         firstScaleScore: event.target.value
-    //     });
-    // }
+    handleScaleChange = (event) => {
+        this.setState({
+            firstScaleScore: event.target.value
+        });
+    }
 
 render() {
+
     return (
         <div>
             <h1>Tamogotchi WellMo</h1>
