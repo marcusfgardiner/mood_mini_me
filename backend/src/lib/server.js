@@ -16,22 +16,31 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mood_m
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
+// Use bodyParser and cors middleware
 app.use(bodyParser.json(),cors())
 
-// app.use(require('../route/auth-router'));
-// I added this as auth-router isn't a file!
-app.use(require("../routes/user.routes.js"));
-
-// app.all('*', (request,response) => {
+// app.all('*', (request, response) => {
 //     console.log('Returning a 404 from catch-all route');
 //     return response.sendStatus(404);
 // });
 
-// Key is that I need to go further than this to actually USING the routes from the mongoose connection to make DB changes
+//TODO: extract mood routes to their own router
+// app.use(require("../routes/moodScores.routes.js"));
+
 app.get('/api/hello', (req, res) => {
     res.send({
         express: 'Hello from the backend of expreessss'
     })
+});
+
+app.post('/api/mood', (req, res) => {
+    console.log('Request sent to mood api')
+    res.send({
+        express: 'Hello from the backend of expreessss'
+    })
+    // Mood.create(req.body)
+    //     .then(token => res.send(token))
+    //     .catch(next)
 });
 
 // error middleware
