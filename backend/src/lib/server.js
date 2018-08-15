@@ -4,6 +4,8 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import Mood from '../model/moodScores.js';
+
 
 const app = express();
 const router = express.Router();
@@ -11,9 +13,10 @@ const router = express.Router();
 //env variables
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mood_mini_me'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/kenkomon'
 
 mongoose.Promise = Promise;
+// TODO: .connect likely has Callback/Promise for production build
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 // Use bodyParser and cors middleware
@@ -33,14 +36,11 @@ app.get('/api/hello', (req, res) => {
     })
 });
 
-app.post('/api/mood', (req, res) => {
-    console.log('Request sent to mood api')
-    res.send({
-        express: 'Hello from the backend of expreessss'
-    })
-    // Mood.create(req.body)
-    //     .then(token => res.send(token))
-    //     .catch(next)
+app.post('/api/mood', (req, res, next) => {
+    console.log(req.body)
+    Mood.create(req.body)
+        .then(token => res.send(token))
+        .catch(next)
 });
 
 // error middleware

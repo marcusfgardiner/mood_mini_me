@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const moodSchema = mongoose.Schema({
-    moodScore: {type: Number, required: true},
+    moodScore: {type: Number},
     created: {type: Date, default : () => new Date()},
 });
 

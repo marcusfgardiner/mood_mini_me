@@ -16,7 +16,7 @@ class App extends Component {
 
     handleMoodSubmit = (event) => {
         event.preventDefault();
-        const data = event.target.value
+        const data = firstScaleScore
         fetch('http://localhost:3000/api/mood', {
             method: 'POST',
             body: data
