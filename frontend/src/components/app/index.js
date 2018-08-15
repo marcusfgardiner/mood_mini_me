@@ -4,24 +4,27 @@ class App extends Component {
     constructor(){
         super();
         this.state = {
-            firstScaleScore: 50
+            moodScore: 50
         }
     }
 
     handleScaleChange = (event) => {
         this.setState({
-            firstScaleScore: event.target.value
+            moodScore: Number(event.target.value)
         });
     }
 
     handleMoodSubmit = (event) => {
         event.preventDefault();
-        const data = firstScaleScore
+        const data = this.state
         fetch('http://localhost:3000/api/mood', {
             method: 'POST',
-            body: data
+            body: JSON.stringify(data),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            })
         })
-        console.log(this.state.firstScaleScore)
+        console.log(this.state.moodScore)
     }
 
 render() {
@@ -36,6 +39,9 @@ render() {
                 min = "0"
                 max = "100"
                 name = "scaleInput"
+                value = {
+                    this.state.value
+                }
                 onChange = {
                     this.handleScaleChange
                 }
@@ -43,7 +49,7 @@ render() {
                 <input type="submit" value="Enter Mood"/>
             </form>
             
-            <h1>Score: {this.state.firstScaleScore} </h1>
+            <h1>Score: {this.state.moodScore} </h1>
         </div>
     );
     }
