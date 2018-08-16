@@ -19,7 +19,7 @@ mongoose.Promise = Promise;
 // TODO: .connect likely has Callback/Promise for production build
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
-// Use bodyParser and cors middleware
+// Use bodyParser and cors middleware = enables CORS requests and parses request.body
 app.use(bodyParser.json(),cors())
 
 // app.all('*', (request, response) => {
@@ -37,7 +37,6 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.post('/api/mood', (req, res, next) => {
-    //TODO: req.body currently blank!
     console.log('scale score', req.body)
     Mood.create(req.body)
         .then(res.sendStatus(200))
