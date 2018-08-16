@@ -8,13 +8,21 @@ import Mood from '../model/moodScores.js';
 
 const moodRouter = module.exports = new Router();
 
-moodRouter.post('/api/mood', jsonParser, (req, res, next) => {
-    console.log('api/mood')
-    console.log(req.body)
+moodRouter.post('/api/mood', (req, res, next) => {
+    console.log('scale score', req.body)
     Mood.create(req.body)
-    .then(token => res.send(token))
-    .catch(next)
+        .then(res.sendStatus(200))
+        .catch(next)
 });
+
+
+// moodRouter.post('/api/mood', jsonParser, (req, res, next) => {
+//     console.log('api/mood')
+//     console.log(req.body)
+//     Mood.create(req.body)
+//     .then(token => res.send(token))
+//     .catch(next)
+// });
 
 // SomeModel.create({
 //     name: 'also_awesome'

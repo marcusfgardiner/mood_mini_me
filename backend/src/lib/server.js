@@ -4,8 +4,6 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import Mood from '../model/moodScores.js';
-
 
 const app = express();
 const router = express.Router();
@@ -20,7 +18,7 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 // Use bodyParser and cors middleware = enables CORS requests and parses request.body
-app.use(bodyParser.json(),cors())
+app.use(cors(), bodyParser.json())
 
 // app.all('*', (request, response) => {
 //     console.log('Returning a 404 from catch-all route');
@@ -28,7 +26,7 @@ app.use(bodyParser.json(),cors())
 // });
 
 //TODO: extract mood routes to their own router
-// app.use(require("../routes/moodScores.routes.js"));
+app.use(require("../routes/moodScores.routes.js"));
 
 app.get('/api/hello', (req, res) => {
     res.send({
@@ -36,24 +34,19 @@ app.get('/api/hello', (req, res) => {
     })
 });
 
-app.post('/api/mood', (req, res, next) => {
-    console.log('scale score', req.body)
-    Mood.create(req.body)
-        .then(res.sendStatus(200))
-        .catch(next)
-});
+
 
 // error middleware
 // app.use(require('./error-middleware'));
 
 export const start = () => {
     app.listen(PORT, () => {
-        console.log('Listening on port: ${PORT}')
+        console.log(`Listening on port: ${PORT}`)
     })
 }
 
 export const stop = () => {
     app.close(PORT, () => {
-        console.log('Shut down on port: ${PORT}')
+        console.log(`Shut down on port: ${PORT}`)
     })
 }
