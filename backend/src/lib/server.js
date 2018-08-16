@@ -40,7 +40,7 @@ app.post('/api/mood', (req, res, next) => {
     //TODO: req.body currently blank!
     console.log('scale score', req.body)
     Mood.create(req.body)
-        // .then(token => res.send(token))
+        .then(res.sendStatus(200))
         .catch(next)
 });
 

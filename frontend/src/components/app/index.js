@@ -23,8 +23,7 @@ class App extends Component {
             headers: new Headers({
                 'Content-Type': 'application/json',
             })
-        })
-        console.log(this.state.moodScore)
+        });
     }
 
 render() {
