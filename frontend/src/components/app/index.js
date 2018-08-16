@@ -30,7 +30,7 @@ render() {
 
     return (
         <div>
-            <h1>Tamogotchi WellMo</h1>
+            <h1>Kenkomon</h1>
             <form onSubmit={this.handleMoodSubmit}> 
                 < input
                 id = "firstScale"
