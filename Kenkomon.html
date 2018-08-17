@@ -17,6 +17,15 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
         </svg>
     </div>
     <script>
+        // TODO: Extract SVG creation class to general class for drawing SVG into pixels
+        // How it works
+        // (1) Create array for canvas 
+        // (2) Create an array for the drawn SVG object, by walking along it
+        // (3a) Draw the white pixel squares
+        // (3b) Compare the arrays from (1) and (2), 
+        // if the drawn SVG object coordinate falls within the canvas square, 
+        // make that fill a black square
+
         let canvArray = [];
         let eggArray = [];
         const eggPath = document.getElementById("eggpath");
@@ -35,9 +44,9 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
                 x += 1
             }
 
-            for (let n = 0; n < pathLength; n += 8) {
-                const path_x = eggPath.getPointAtLength(n).x;
-                const path_y = eggPath.getPointAtLength(n).y;
+            for (let n = 0; n < pathLength; n += 1) {
+                const path_x = eggPath.getPointAtLength(n).x * 0.6;
+                const path_y = eggPath.getPointAtLength(n).y * 0.6;
                 eggArray.push([path_x, path_y]);
             }
             console.log(eggArray);
@@ -47,14 +56,25 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
         function draw() {
 
             background(220);
-            fill(255);
             noStroke();
 
             for (let j = 0; j < canvArray.length; j++) {
+                fill(255);
                 let rect_x = canvArray[j][0];
                 let rect_y = canvArray[j][1];
+                for (let v = 0; v < eggArray.length; v++) {
+                    let egg_x = eggArray[v][0];
+                    let egg_y = eggArray[v][1];
+                     if (((egg_x > rect_x)&& (egg_x < (rect_x+9))) && 
+                        ((egg_y > rect_y) && (egg_y < (rect_y + 9)))) {
+                        fill(0);
+                     }
+                }
                 rect(rect_x, rect_y, 9, 9);
             }
+
+            
+
 
             // for (let v = 0; )
 
