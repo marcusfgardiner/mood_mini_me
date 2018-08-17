@@ -15,7 +15,7 @@ moodRouter.post('/api/mood', asyncHandler(async (req, res, next) => {
     // Using the imported DB using Mongoose ODM methods
     await Mood.create(req.body).exec()
     res.sendStatus(200)
-}));
+})); 
 
 moodRouter.get('/api/existingMoods', (req, res, next) => {
     Mood.find().exec()

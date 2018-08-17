@@ -5,7 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
-//Express app
+//Express app 
 const app = express();
 
 //env variables for Ports: Back end Server & Mongo connection

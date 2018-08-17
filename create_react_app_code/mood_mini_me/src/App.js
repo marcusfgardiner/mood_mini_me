@@ -32,7 +32,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
          {this.state.response}
-        </p>
+        </p> 
       </div>
     );
   }

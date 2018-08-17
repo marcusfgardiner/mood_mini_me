@@ -32,7 +32,7 @@ class App extends Component {
         this.setState({
             moodScore: Number(event.target.value)
         });
-    }
+    } 
 
     handleMoodSubmit = (event) => {
         event.preventDefault();
