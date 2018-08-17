@@ -10,11 +10,19 @@
 <body>
     <script src="sketch.js"></script>
     <div>
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http:s//www.w3.org/1999/xlink" x="0px" y="0px"
-            width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
-            <path fill="0" id="eggpath" d="M286.667,194.27c0,82.842-55.119,105.73-137.957,105.73S13.333,276.252,13.333,193.41
-C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
-        </svg>
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+        <g>
+            <path id="eggpath" fill="none" stroke="#000000" stroke-miterlimit="10" d="M268.334,182.997c0,55.514-53.334,98.002-118.334,98.002
+    c-70.333,0-118.334-51.258-118.334-98.747c0-71.73,45.493-167.464,117.218-167.464S268.334,111.266,268.334,182.997z" />
+            <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="85,209.007 111.667,201.007 146.333,209.007 171,201.007 
+    185,209.007 199.667,201.007 218.333,209.007 " />
+            <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="84.33,100.655 96.33,81.321 116.996,81.321 127.667,94.657 
+    " />
+            <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="106.669" y1="105.666" x2="106.669" y2="126.332" />
+            <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="180.333" y1="105.666" x2="232.333" y2="105.666" />
+        </g>
+    </svg>
     </div>
     <script>
         // TODO: Extract SVG creation class to general class for drawing SVG into pixels
@@ -25,6 +33,8 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
         // (3b) Compare the arrays from (1) and (2), 
         // if the drawn SVG object coordinate falls within the canvas square, 
         // make that fill a black square
+
+        //TODO: need to iterate through ALL svg vectors and push these onto the 'black square' array
 
         let canvArray = [];
         let eggArray = [];
@@ -44,9 +54,9 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
                 x += 1
             }
 
-            for (let n = 0; n < pathLength; n += 1) {
-                const path_x = eggPath.getPointAtLength(n).x * 0.6;
-                const path_y = eggPath.getPointAtLength(n).y * 0.6;
+            for (let n = 0; n < pathLength; n++) {
+                const path_x = eggPath.getPointAtLength(n).x;
+                const path_y = eggPath.getPointAtLength(n).y;
                 eggArray.push([path_x, path_y]);
             }
             console.log(eggArray);
@@ -62,6 +72,7 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
                 fill(255);
                 let rect_x = canvArray[j][0];
                 let rect_y = canvArray[j][1];
+                // TODO: optimise to not start at v=0 each time, but start at the previous v point
                 for (let v = 0; v < eggArray.length; v++) {
                     let egg_x = eggArray[v][0];
                     let egg_y = eggArray[v][1];
