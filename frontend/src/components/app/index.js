@@ -65,6 +65,8 @@ render() {
             
             <h1>Score: {this.state.moodScore} </h1>
             <h1>History of scores: </h1>
+            <h1>Tamogotchi</h1>
+
         </div>
     );
     }

@@ -2,6 +2,7 @@
 
 import { Router } from 'express';
 import jsonParser from 'body-parser';
+import asyncHandler from 'express-async-handler';
 
 // import basicAuth from '../lib/basic-auth-middleware.js'
 import Mood from '../model/moodScores.js';
@@ -16,11 +17,11 @@ moodRouter.post('/api/mood', asyncHandler(async (req, res, next) => {
     res.sendStatus(200)
 }));
 
-moodRouter.get('/api/existingMoods', (req, res, next) => {
-    Mood.find().exec()
-    .then(function(results) {
-        res.send(results)
-    }).catch(function(err) {
-        res.send(err)
-    })
-});
+// moodRouter.get('/api/existingMoods', (req, res, next) => {
+//     Mood.find().exec()
+//     .then(function(results) {
+//         res.send(results)
+//     }).catch(function(err) {
+//         res.send(err)
+//     })
+// });
