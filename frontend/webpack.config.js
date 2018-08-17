@@ -14,7 +14,7 @@ const ExtractPlugin = require('extract-text-webpack-plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 module.exports = {
     devtool: 'eval',
-    entry: path.resolve(__dirname, 'src/main.js'),
+    entry: [ "babel-polyfill", path.resolve(__dirname, 'src/main.js')],
     output: {
         filename: 'bundle-[hash].js',
         path: path.resolve(__dirname, 'build'),

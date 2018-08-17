@@ -17,11 +17,12 @@ moodRouter.post('/api/mood', asyncHandler(async (req, res, next) => {
     res.sendStatus(200)
 }));
 
-// moodRouter.get('/api/existingMoods', (req, res, next) => {
-//     Mood.find().exec()
-//     .then(function(results) {
-//         res.send(results)
-//     }).catch(function(err) {
-//         res.send(err)
-//     })
-// });
+moodRouter.get('/api/existingMoods', (req, res, next) => {
+    Mood.find().exec()
+    .then(function(results) {
+        console.log(results)
+        res.send(results)
+    }).catch(function(err) {
+        res.send(err)
+    })
+});

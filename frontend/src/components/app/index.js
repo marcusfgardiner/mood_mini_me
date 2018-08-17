@@ -5,8 +5,27 @@ class App extends Component {
         super();
         this.state = {
             moodScore: 50,
-            existingMoodScores: {} 
+            existingMoodScores: 0
         }
+    }
+
+    componentDidMount() {
+        this.fetchExistingScores()
+            .then(res => this.setState({
+                existingMoodScores: res.results
+            }
+        ))
+            .catch(err => console.log(err));
+    }
+
+    fetchExistingScores = async () => {
+        // Don't need fully qualified route i.e. 'http...' due to "proxy" code in package.json file
+        const response = await fetch('http://localhost:3000/api/existingMoods');
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
     }
 
     handleScaleChange = (event) => {
@@ -28,10 +47,11 @@ class App extends Component {
         });
     }
 
+
 //    componentDidMount() {
-//        this.callAPI()
-//        .then(res => this.setState({existingMoodScores: res.express }))
-//        .catch(err => console.log(err));
+//        this.callApi()
+    //    .then(res => this.setState({existingMoodScores: res }))
+    //    .catch(err => console.log(err));
 //    }
 
 //    callApi = async () => {
@@ -64,9 +84,10 @@ render() {
             </form>
             
             <h1>Score: {this.state.moodScore} </h1>
-            <h1>History of scores: </h1>
+            < h1 > History of scores: 
+            TODO: iterate through Hash of existing mood scores and read off the '.moodScores'
+            {this.state.existingMoodScores} </h1>
             <h1>Tamogotchi</h1>
-
         </div>
     );
     }
