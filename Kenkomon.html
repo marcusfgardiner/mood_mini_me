@@ -17,30 +17,59 @@ C13.333,110.566,65.874,0,148.711,0S286.667,111.426,286.667,194.27z" />
         </svg>
     </div>
     <script>
-    
+        let canvArray = [];
+        let eggArray = [];
+        const eggPath = document.getElementById("eggpath");
+        const pathLength = eggPath.getTotalLength();
+
         function setup() {
             createCanvas(300, 300);
-        }
 
-        let eggPath = document.getElementById("eggpath")
-        let pathLength = eggPath.getTotalLength()
-
-        function draw() {
-            background(220);
-            fill(255);
-            noStroke();
-            let x = 0
+            let x = 0;
             while (x < 30) {
                 for (var i = 0; i < 30; i++) {
-                    rect(i * 10, x * 10, 9, 9);
-                    // for (var i = 0; i < pathLength; i++) {
-                    //     let eggCoOrd = eggPath.getPointAtLength(i)
-                    // }
+                    xCoOrd = i * 10;
+                    yCoOrd = x * 10;
+                    canvArray.push([xCoOrd, yCoOrd]);
                 }
                 x += 1
             }
+
+            for (let n = 0; n < pathLength; n += 8) {
+                const path_x = eggPath.getPointAtLength(n).x;
+                const path_y = eggPath.getPointAtLength(n).y;
+                eggArray.push([path_x, path_y]);
+            }
+            console.log(eggArray);
+
         }
 
+        function draw() {
+
+            background(220);
+            fill(255);
+            noStroke();
+
+            for (let j = 0; j < canvArray.length; j++) {
+                let rect_x = canvArray[j][0];
+                let rect_y = canvArray[j][1];
+                rect(rect_x, rect_y, 9, 9);
+            }
+
+            // for (let v = 0; )
+
+            // console.log(eggArray)
+            
+            // while (x < 30) {
+            //     for (var i = 0; i < 30; i++) {
+            //         xCoOrd = i * 10;
+            //         yCoOrd = x * 10;
+            //         rect(xCoOrd, yCoOrd, 9, 9);
+            //     }
+            //     x += 1
+            // }
+        }
+        
         console.log('Length', eggPath.getTotalLength())
         console.log(eggPath.getPointAtLength(100))</script>
 </body>
