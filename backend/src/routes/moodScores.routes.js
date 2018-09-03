@@ -20,7 +20,7 @@ moodRouter.post('/api/mood', asyncHandler(async (req, res, next) => {
 moodRouter.get('/api/existingMoods', (req, res, next) => {
     Mood.find().exec()
     .then(function(results) {
-        console.log(results)
+        console.log('Results read from backend!', results)
         res.send(results)
     }).catch(function(err) {
         res.send(err)

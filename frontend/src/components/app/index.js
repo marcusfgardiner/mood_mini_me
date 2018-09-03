@@ -5,16 +5,24 @@ class App extends Component {
         super();
         this.state = {
             moodScore: 50,
-            existingMoodScores: 0
+            existingMoodScores: []
         }
     }
-
+    //TODO: Print existing records on the page
+        //State is definitely read in 'moodScores.routes.js' -> can see it in backend console
+    // Potential issues: 
+    //(1) 'res.send' in moodScores.routes is not working
+        // Understand if state is making it back to front end from back end
+    // (2) Need to learn how to print complex state hash AFTER component updates with new data
+        // iterate through Hash of existing mood scores and read off the '.moodScores'
     componentDidMount() {
         this.fetchExistingScores()
-            .then(res => this.setState({
+            .then(res => 
+            this.setState({
                 existingMoodScores: res.results
-            }
-        ))
+            })
+            // console.log(this.state.existingMoodScores)
+        )
             .catch(err => console.log(err));
     }
 
@@ -47,22 +55,8 @@ class App extends Component {
         });
     }
 
-
-//    componentDidMount() {
-//        this.callApi()
-    //    .then(res => this.setState({existingMoodScores: res }))
-    //    .catch(err => console.log(err));
-//    }
-
-//    callApi = async () => {
-//        const response = await fetch('http://localhost:3000/api/existingMoods');
-//        // response.json() returns a promise -> await and return its result
-//        const body = await response.json()
-//        return body
-//    }
-
 render() {
-
+    console.log(this.state.existingMoodScores)
     return (
         <div>
             <h1>Kenkomon</h1>
