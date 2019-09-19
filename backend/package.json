@@ -7,7 +7,7 @@
     "start": "babel-node index.js",
     "dboff": "killall mongod",
     "watch": "nodemon index.js --exec babel-node",
-    "dbon": "mkdir -p ./db && mongod --dbpath ./db"
+    "dbon": "mkdir -p db && mongod --dbpath db"
   },
   "babel": {
     "presets": [
@@ -23,8 +23,8 @@
     "express": "^4.16.3",
     "express-async-handler": "^1.1.4",
     "mongod": "^2.0.0",
-    "mongodb": "^3.1.1",
-    "mongoose": "^5.2.7"
+    "mongodb": "^3.3.2",
+    "mongoose": "^5.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

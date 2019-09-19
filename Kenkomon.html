@@ -27,10 +27,11 @@
     <script>
         // TODO: Extract SVG creation class to general class for drawing SVG into pixels
         // How it works
-        // (1) Create array for canvas 
+        // (1) Create array for canvas with a grey background
         // (2) Create an array for the drawn SVG object, by walking along it
-        // (3a) Draw the white pixel squares
-        // (3b) Compare the arrays from (1) and (2), 
+        // (3a) Draw the white pixel squares on top of the grey canvas.
+        // I am not drawing the borders, I am drawing smaller white squares over grey ones
+        // (3b) Compare the arrays from (1) and (2) 
         // if the drawn SVG object coordinate falls within the canvas square, 
         // make that fill a black square
 
@@ -43,8 +44,11 @@
         function setup() {
             createCanvas(300, 300);
 
+        // Create arrays and put in values into them, which we will draw later
             let x = 0;
+            //While loop is the row we are drawing
             while (x < 30) {
+                // Draw smaller white squares on top of grey background by getting top left point for each one
                 for (var i = 0; i < 30; i++) {
                     xCoOrd = i * 10;
                     yCoOrd = x * 10;
@@ -56,6 +60,7 @@
             for (let i = 0; i < tElements.length; i++) {
                 let thisElement = tElements[i];
                 for (let n = 0; n < thisElement.getTotalLength(); n++) {
+                    // These methods exist on SVG Geometry elements -> they give a coordinate for the element
                     const path_x = thisElement.getPointAtLength(n).x;
                     const path_y = thisElement.getPointAtLength(n).y;
                     blackSquaresArray.push([path_x, path_y]);
@@ -66,20 +71,25 @@
         function draw() {
             background(220);
             noStroke();
-
+            
+            //Step through both arrays to fill in the canvas
             for (let j = 0; j < canvArray.length; j++) {
-                fill(255);
+                fill(300);
+                // These are coordinates on the canvas to draw
                 let rect_x = canvArray[j][0];
                 let rect_y = canvArray[j][1];
                 // TODO: optimise to not start at v=0 each time, but start at the previous v point
+                    // Have to sort the array to be able to do this - as currently multiple lines are put into the array
                 for (let v = 0; v < blackSquaresArray.length; v++) {
                     let egg_x = blackSquaresArray[v][0];
                     let egg_y = blackSquaresArray[v][1];
-                     if (((egg_x > rect_x)&& (egg_x < (rect_x+9))) && 
+                    // If any point in the blackSquaresArray falls within the current box - draw a black square instead
+                     if (((egg_x > rect_x)&& (egg_x < (rect_x + 9))) && 
                         ((egg_y > rect_y) && (egg_y < (rect_y + 9)))) {
                         fill(0);
                      }
                 }
+                // This fills in all but the last 1 cell within a 10 by 10 square -> drawing one block at a time
                 rect(rect_x, rect_y, 9, 9);
             }
         }
